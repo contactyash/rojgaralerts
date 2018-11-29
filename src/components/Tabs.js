@@ -1,7 +1,7 @@
 import React from "react";
-import Posts from "./Posts";
 import database from "../firebase/firebase";
 import Filters from "./Filters";
+import VisiblePosts from "./VisiblePosts";
 class Tabs extends React.PureComponent {
   state = {
     activeIndex: 0,
@@ -74,31 +74,10 @@ class Tabs extends React.PureComponent {
       );
     });
   }
-  renderTabContent() {
-    const { tabs, filterString, stateFilterString, activeIndex } = this.state;
-    const activeTabArr = this.state[tabs[activeIndex]];
-    return (
-      <React.Fragment>
-        {activeTabArr
-          .filter(el => {
-            return !filterString && !stateFilterString
-              ? true
-              : filterString
-              ? el.dept.includes(filterString) ||
-                el.postName.includes(filterString)
-              : stateFilterString
-              ? el.state &&
-                el.state.toLowerCase().includes(stateFilterString.toLowerCase())
-              : null;
-          })
-          .map((el, i) => {
-            return <Posts {...el} key={i} id={el.key} />;
-          })}
-      </React.Fragment>
-    );
-  }
 
   render() {
+    const { tabs, filterString, stateFilterString, activeIndex } = this.state;
+    const activeTabArr = this.state[tabs[activeIndex]];
     return (
       <div>
         <div className="tab-names">{this.renderTabNames()}</div>
@@ -106,7 +85,13 @@ class Tabs extends React.PureComponent {
           handleFilter={this.handleFilter}
           handleStateFilter={this.handleStateFilter}
         />
-        <div className="tab-content">{this.renderTabContent()}</div>
+        <div className="tab-content">
+          <VisiblePosts
+            visiblePosts={activeTabArr}
+            filterString={filterString}
+            stateFilterString={stateFilterString}
+          />
+        </div>
       </div>
     );
   }

@@ -11,17 +11,21 @@ class AdmitCards extends Component {
     filterString: "",
     stateFilterString: ""
   };
-
-  handleFilter = (filterText, isActive) => {
-    if (isActive) {
-      this.setState(() => ({ filterString: filterText }));
+  handleFilter = filterString => {
+    if (filterString) {
+      this.setState(() => ({
+        stateFilterString: "",
+        filterString
+      }));
     } else {
-      this.setState(() => ({ filterString: "" }));
+      this.setState(() => ({ filterString: "", stateFilterString: "" }));
     }
   };
-  handleStateFilter = (filterObj, isActive) => {
-    if (isActive) {
-      this.setState(() => filterObj);
+  //we can not predict argument is statefilterstring or fitterstrig ,so below two function
+  //cant be combined
+  handleStateFilter = stateFilterString => {
+    if (stateFilterString) {
+      this.setState({ filterString: "", stateFilterString });
     } else {
       this.setState(() => ({ filterString: "", stateFilterString: "" }));
     }

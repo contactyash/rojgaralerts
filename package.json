@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "export": "next export"
+    "start": "next start -p 8000"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +22,8 @@
     "react": "^16.6.3",
     "react-day-picker": "^7.2.4",
     "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^3.0.3"
   }
 }
