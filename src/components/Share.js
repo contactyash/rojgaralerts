@@ -1,9 +1,9 @@
 import { withRouter } from "next/router";
-import { facebookIcon } from "../assets/svg";
 const Share = props => {
   const { asPath } = props.router;
   const message = props.message;
-  const link = `https://facebook.com/${asPath}`;
+  // const root ="https://rojgaralerts.herokuapp.com";
+  const link = `https://rojgaralerts.herokuapp.com${asPath}`;
   return (
     <div className="share-component">
       <a
